@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+	<style>
+
+		* {
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Roboto', sans-serif;
+		}
+		body {
+			height: 100vh;
+			overflow: hidden;
+		}
+		.main {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
+		.headline {
+			font-size: 64px;
+		}
+		.scores {
+			width: 600px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-bottom: 12px;
+		}
+		.scores > div {
+			display: flex;
+			flex-direction: row;
+			gap: 6px;
+		}
+		.scores > div > p {
+			display: flex;
+			align-items: center;
+		}
+		.items {
+			display: flex;
+			flex-direction: row;
+			gap: 24px;
+		}
+		.items > div {
+			width: 215px;
+			height: 150px;
+			background: whitesmoke;
+			border-radius: 6px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.icons {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background-color: whitesmoke;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.show-choice {
+			position: absolute;
+			display: flex;
+			padding: 4rem 2rem;
+			background-color: whitesmoke;
+			border-radius: 7px;
+			width: 60vw;
+			align-items: center;
+			justify-content: space-between;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		@media (max-width: 875px) {
+			.show-choice {
+				width: 100vw;
+			}
+		}
+		.show-choice > img {
+			background-color: lightblue;
+			padding: 20px;
+			width: 175px;
+			height: 175px;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<div class="main">
+		<div>
+			<h1 class="headline">Rock-Paper-Scissor</h1>
+		</div>
+		<div class="scores">
+			<div style="display: flex; align-items: center;">
+				<div class="icons">
+					<svg style="width: 50px; height:25px;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM164.1 325.5C182 346.2 212.6 368 256 368s74-21.8 91.9-42.5c5.8-6.7 15.9-7.4 22.6-1.6s7.4 15.9 1.6 22.6C349.8 372.1 311.1 400 256 400s-93.8-27.9-116.1-53.5c-5.8-6.7-5.1-16.8 1.6-22.6s16.8-5.1 22.6 1.6zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+				</div>
+				<p id="userCount" style="font-size: 64px; height: 20px;">0</p>
+			</div>
+			<div style="display: flex; align-items: center;">
+				<p id="compCount" style="font-size: 64px; height: 20px;">0</p>
+				<div class="icons">
+					<svg style="width: 50px; height:25px;" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M384 96V320H64L64 96H384zM64 32C28.7 32 0 60.7 0 96V320c0 35.3 28.7 64 64 64H181.3l-10.7 32H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H352c17.7 0 32-14.3 32-32s-14.3-32-32-32H277.3l-10.7-32H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm464 0c-26.5 0-48 21.5-48 48V432c0 26.5 21.5 48 48 48h64c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48H528zm16 64h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H544c-8.8 0-16-7.2-16-16s7.2-16 16-16zm-16 80c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H544c-8.8 0-16-7.2-16-16zm32 160a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+				</div>
+			</div>
+		</div>
+		<div class="items">
+			<div id="rock">
+				<img style="height:100px;" id="rock" src="img/rock.png" alt="">
+			</div>
+			<div id="paper">
+				<img style="height:100px;" id="paper" src="img/paperr.png" alt="">
+			</div>
+			<div id="sci">
+				<img style="height:100px;" id="sci" src="img/sci.png" alt="">
+			</div>
+		</div>
+	</div>
+	<script>
+		let items = document.querySelector('.items');
+		console.log(items)
+
+		let userCount = document.getElementById('userCount');
+		let compCount = document.getElementById('compCount');
+
+
+		items.addEventListener('click', userButton);
+
+		let userChoice = [];
+		let compChoice = [];
+
+		function userButton(){
+			userChoice = [];
+			if (event.target.id != 'rock' & event.target.id != 'paper' & event.target.id != 'sci') return;
+			else if (event.target.id == 'rock'){
+				userChoice.push('r');
+			}
+			else if (event.target.id == 'paper'){
+				userChoice.push('p');
+			}
+			else if (event.target.id == 'sci'){
+				userChoice.push('s');
+			}
+			computerChoice();
+		}
+
+		function computerChoice(){
+			compChoice = [];
+			let knb = ['k', 'n', 'b']
+			knb = Math.floor(Math.random() * knb.length);
+
+			switch(knb){
+				case 0:
+					compChoice.push('r');
+					break;
+				case 1:
+					compChoice.push('p');
+					break;
+				case 2:
+					compChoice.push('s');
+					break;
+			}
+			showChoice(userChoice[0], compChoice[0]);
+			// compare(userChoice[0], compChoice[0]);
+		}
+
+		function showChoice(userChoice, compChoice) {
+			let div = document.createElement('div')
+			div.classList.add('show-choice')
+			let userChoiceImg = document.createElement('img')
+			switch (userChoice) {
+				case 'r':
+					userChoiceImg.src = 'img/rock.png'
+					break;
+				case 'p':
+					userChoiceImg.src = 'img/paperr.png'
+					break;
+				case 's':
+					userChoiceImg.src = 'img/sci.png'
+					break;
+			}
+			
+			let compChoiceImg = document.createElement('img')
+			
+			switch (compChoice) {
+				case 'r':
+					compChoiceImg.src = 'img/rock.png';
+					break;
+				case 'p':
+					compChoiceImg.src = 'img/paperr.png';
+					break;
+				case 's':
+					compChoiceImg.src = 'img/sci.png';
+					break;
+			}
+
+			div.append(userChoiceImg, compChoiceImg)
+			document.body.append(div)
+			// divItems.replaceWith(div)
+			setTimeout(clearChoicePanel, 3000)
+		}
+
+		function clearChoicePanel(){
+			let div = document.querySelector('.show-choice')
+			div.remove();
+			compare(userChoice[0], compChoice[0])
+		}
+
+		function compare(userChoice, compChoice){
+			let together = userChoice + compChoice;
+			switch(together){
+				case 'rr':
+					console.log('Ничья!')
+					break;
+				case 'rs':
+					console.log('Победа!')
+					userCount.innerHTML = Number(userCount.textContent) + 1;
+					break;
+				case 'rp':
+					console.log('Проигрышь')
+					compCount.innerHTML = Number(compCount.textContent) + 1;
+					break;
+				case 'ss':
+					console.log('Ничья!')
+					break;
+				case 'sr':
+					console.log('Проигрышь!')
+					compCount.innerHTML = Number(compCount.textContent) + 1;
+					break;
+				case 'sp':
+					console.log('Победа!')
+					userCount.innerHTML = Number(userCount.textContent) + 1;
+					break;
+				case 'pp':
+					console.log('Ничья!')
+					break;
+				case 'pr':
+					console.log('Победа!')
+					userCount.innerHTML = Number(userCount.textContent) + 1;
+					break;
+				case 'ps':
+					console.log('Проигрышь!')
+					compCount.innerHTML = Number(compCount.textContent) + 1;
+					break;
+			}
+			console.log(userChoice)
+		}
+	</script>
+</body>
+</html>
